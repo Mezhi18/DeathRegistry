@@ -1,12 +1,10 @@
 ---
 title: "Where are people dying in Toronto?"
-subtitle: "My subtitle if needed"
 author: 
   - Yan Mezhiborsky
-thanks: "Code and data are available at: LINK."
+thanks: "Code and data are available at: https://github.com/Mezhi18/DeathRegistry "
 date: "September 26, 2024"
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
 number-sections: true
 bibliography: references.bib
