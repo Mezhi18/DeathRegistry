@@ -4,7 +4,7 @@ subtitle: "My subtitle if needed"
 author: 
   - Yan Mezhiborsky
 thanks: "Code and data are available at: LINK."
-date: Thursday September 26
+date: "September 26, 2024"
 date-format: long
 abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
@@ -18,12 +18,15 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
+
 ```
 
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
+In our paper we will be looking at the Toronto death registry from Open Data Toronto. We will be looking at where each death occured and in which regions of Toronto had the most death, over the last deacde.
+
+We use @citeR, @rohan, @opendata for our research in this paper.
 
 The remainder of this paper is structured as follows. @sec-data....
 
@@ -31,37 +34,37 @@ The remainder of this paper is structured as follows. @sec-data....
 
 # Data {#sec-data}
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
-
-
-
-Talk more about it.
+Our chosesn data set has a total of 5 Variables.First, we have "_id" which is the identification number for each row. Second, we have "CIVIC_CENTRE" which is the region of Toronto these death happen in we have 4 total regions in our data set. Third, we have death licences, which is the total number of death that happened in a region within a certain time frame.Next, PLACE_OF_DEATH which tells us if these deaths happened within or outside of the city limits of the City of Toronto.
 
 
 
 
 
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
 
 
 
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
 
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
 
 
 # Results
 
-Our results are summarized in @tbl-modelresults.
+```{r}
+
+death_data <- read.csv("../data/raw_data/Death Registry Data.csv")
+
+summary_data <- death_data %>%
+  group_by(CIVIC_CENTRE) %>%
+  summarize(total_deaths = sum(DEATH_LICENCES, na.rm = TRUE))
+
+ggplot(summary_data, aes(x = CIVIC_CENTRE, y = total_deaths, fill = CIVIC_CENTRE)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Total Death Licenses by Civic Center", 
+       x = "Civic Center", 
+       y = "Total Death Licenses") +
+  theme_minimal()
+
+```
+
 
 
 
@@ -94,17 +97,8 @@ Weaknesses and next steps should also be included.
 
 ## Posterior predictive check
 
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
 
 
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
 
 
 
