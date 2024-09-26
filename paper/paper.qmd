@@ -1,5 +1,5 @@
 ---
-title: "My title"
+title: "Where are people dying in Toronto?"
 subtitle: "My subtitle if needed"
 author: 
   - Yan Mezhiborsky
@@ -49,12 +49,20 @@ Our chosesn data set has a total of 5 Variables.First, we have "_id" which is th
 # Results
 
 ```{r}
+#| include: True
+#| warning: false
+#| message: false
+#| echo: false
+#| label: fig-deaths
+#| fig-cap: Deaths in each Civic Cenetr since 2011
 
-death_data <- read.csv("../data/raw_data/Death Registry Data.csv")
+death_data <- read.csv("../data/raw_data/Death_Registry_Statistics Data.csv")
+
 
 summary_data <- death_data %>%
   group_by(CIVIC_CENTRE) %>%
-  summarize(total_deaths = sum(DEATH_LICENCES, na.rm = TRUE))
+  summarize(total_deaths = sum(DEATH_LICENSES, na.rm = TRUE))
+
 
 ggplot(summary_data, aes(x = CIVIC_CENTRE, y = total_deaths, fill = CIVIC_CENTRE)) +
   geom_bar(stat = "identity") +
@@ -65,7 +73,7 @@ ggplot(summary_data, aes(x = CIVIC_CENTRE, y = total_deaths, fill = CIVIC_CENTRE
 
 ```
 
-
+In @fig-deaths we can see Etobicoke is has had the most death since 2011, followed by North York, and then by Scarborough, while these do decrease in order respectively, the most interesting part in the The city of Toronto itself has the least total death Licences sissued over the past 13 years by a very wide margin. 
 
 
 
